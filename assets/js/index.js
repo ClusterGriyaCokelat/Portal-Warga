@@ -78,6 +78,8 @@ async function muatJadwal() {
   ]);
 
   const grid = document.getElementById("grid-jadwal");
+  const daftarHp = document.getElementById("daftar-jadwal-hp");
+  daftarHp.innerHTML = "";
   if (error) {
     grid.innerHTML = `<p class="col-span-7 text-sm text-rose-600">Gagal memuat jadwal: ${escapeHtml(error.message)}</p>`;
     return;
@@ -115,6 +117,23 @@ async function muatJadwal() {
   grid.innerHTML = data.length
     ? kepala + offset + sel
     : kepala + offset + sel + `<p class="col-span-7 mt-2 text-sm text-stone-400 italic">Jadwal bulan ${namaBulan(bulanTampil)} belum diterbitkan.</p>`;
+
+  // Daftar versi HP: tanggal · nomor rumah · nama · status
+  daftarHp.innerHTML = data.map((j) => {
+    const aktif = j.tanggal === hariIni;
+    return `
+      <li class="flex items-center gap-3 px-3 py-2 ${aktif ? "bg-brand-50" : ""}">
+        <span class="w-11 shrink-0 text-center leading-tight ${aktif ? "text-brand-700 font-bold" : "text-stone-500"}">
+          <span class="block text-[10px] uppercase">${escapeHtml(j.hari.slice(0, 3))}</span>
+          <span class="block text-base font-semibold">${Number(j.tanggal.slice(8))}</span>
+        </span>
+        <span class="min-w-0 flex-1">
+          <span class="block text-sm font-bold text-brand-800">Rumah ${escapeHtml(j.nomor_rumah)}</span>
+          <span class="block text-xs text-stone-600 truncate">${escapeHtml(j.nama_warga)}${aktif ? ` · <b class="text-brand-600">Hari ini</b>` : ""}</span>
+        </span>
+        ${ikonStatusPiket(j, petaStatus[j.tanggal], j.tanggal, hariIni, !!status)}
+      </li>`;
+  }).join("");
 
   // Pengumuman otomatis "piket hari ini" (selalu berdasarkan hari ini)
   muatPiketHariIni();
