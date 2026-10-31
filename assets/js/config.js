@@ -14,7 +14,7 @@ window.APP_CONFIG = {
   SUPABASE_ANON_KEY: "sb_publishable_ds4WzPjROtovINyKAM5tjg_iicLZfLD",
 
   // OneSignal → Settings → Keys & IDs
-  ONESIGNAL_APP_ID: "4957da47-e06d-4cd2-8874-9dd4b80afab9",
+  ONESIGNAL_APP_ID: "2166ac5b-b4c3-42f5-b179-bd7f6aaf5155",
 
   // Identitas cluster
   NAMA_CLUSTER: "Cluster Griya Cokelat",
