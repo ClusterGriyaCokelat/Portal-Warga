@@ -28,5 +28,5 @@ window.APP_CONFIG = {
   IURAN_BULANAN: 25000,
 
   // Nama bucket Supabase Storage
-  BUCKET_FOTO: "Portal Satu",
+  BUCKET_FOTO: "foto-gerbang",
 };
